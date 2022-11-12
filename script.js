@@ -11,7 +11,7 @@ async function start() {
   container.style.position = 'relative'
   document.body.append(container)
   const labeledFaceDescriptors = await loadLabeledImages()
-  const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6)
+  const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.7)
   let image
   let canvas
   document.body.append('Loaded')
@@ -36,12 +36,12 @@ async function start() {
 }
 
 function loadLabeledImages() {
-  const labels = ['vicky', 'vinit', 'sachin', 'anuj']
+  const labels = ['vicky', 'vinit', 'sachin', 'anuj','akshat', 'vedant']
   return Promise.all(
     labels.map(async label => {
       const descriptions = []
       for (let i = 1; i <= 5; i++) {
-        const img = await faceapi.fetchImage(`https://raw.githubusercontent.com/WebDevSimplified/Face-Recognition-JavaScript/master/images/${label}/${i}.jpg`)
+        const img = await faceapi.fetchImage(`https://raw.githubusercontent.com/vinitvijal/face-recog-private/main/images/${label}/img${i}.jpeg`)
         const detections = await faceapi.detectSingleFace(img).withFaceLandmarks().withFaceDescriptor()
         descriptions.push(detections.descriptor)
       }
